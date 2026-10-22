@@ -75,6 +75,8 @@ pub fn start() {
                         app.session.set_document(doc);
                     }
                     let prefs = crate::prefs::PrefsSync::new(stored);
+                    // The desktop control channel for the page (`control::request`): agents and tests.
+                    app = app.with_control(crate::control::channel(&cc.egui_ctx));
                     // No document to show: start on File › Home, as the desktop app does (#766).
                     if !sample {
                         app.start_screen();
